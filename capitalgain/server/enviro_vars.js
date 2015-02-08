@@ -1,6 +1,7 @@
 Meteor.startup(function(){
-	console.log("test");
+	//console.log("test");
 	//accessing collections
-	test = new Mongo.Collection("stuff");
-	console.log(test.find().fetch());
+	//test = new Mongo.Collection("stuff");
+
+	//console.log(test.find().fetch());
 });

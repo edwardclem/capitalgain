@@ -24,10 +24,13 @@ def find_delta(data):
 
 def get_data(filename):
     data = read_data(filename)
+    return get_ma(data, 20)[0::10]
+
+def get_delta(filename):
+    data = read_data(filename)
     delta = find_delta(get_ma(data, 20))
     delta = delta[0::10]
     delta = delta - delta.min()
     delta = delta / max(delta) * 30
-    delta = map(int, delta)
     return delta
 

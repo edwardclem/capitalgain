@@ -3,13 +3,12 @@ import numpy as np
 from scipy.stats import norm
 import requests
 from random import randint
-from utils import get_data
+from utils import get_data, get_delta
 
 all_chords = ['664', '66', '6', '264', '26', '2', '364', '36', '3', '27', '37', '67', 'b7', '47', '57', '17', '5/5', '464', '46', '4', '564', '56', '5', '164', '16', '1']
 
 """Returns dict"""
 def get_chord_probs(previous_chords):
-	print "prev_chords = ", previous_chords
 	payload = {'cp':','.join(previous_chords)}
 	chords = requests.get('http://www.hooktheory.com/api/trends/stats', params=payload).json()
 	probs = {chord['chord_ID'] : chord['probability'] for chord in chords}
@@ -47,20 +46,35 @@ def get_best_chord(index, previous_chords):
 	return best_chord
 
 def generate_song(filename):
-	delta = get_data(filename)
+	delta = get_delta(filename)
+	delta = map(int, delta)
 	delta, count = get_duration(delta)
 	# Obtain first chord
 	song = [requests.get('http://www.hooktheory.com/api/trends/stats').json()[randint(0, 10)]['chord_ID']]
-
 	# Generate rest of song
 	for datapoint in delta:
 		song.append(get_best_chord(datapoint, song[-randint(1, 4):]))
-		#if len(song) % 8 == 0:
-		#	song[-1] = song[-1][0]
+		if song[-1].isdigit() and song[-1][-1] == '7' and len(song[-1]) == 2 and randint(0, 10) > 5:
+			song[-1] = song[0]
 		print song[-1]
 
 	return song, count
 
+def phil_use_this(filename):
+	song, count = generate_song(filename)
+	return [{'name':chord, 'dur':time} for chord, time in zip(song, count)]
+
+def fit_melody(filename):
+	data = get_data(filename)
+	data = data[1:]
+	x = np.arange(256)
+	p = np.polyfit(x, data, 3)
+	predicted = p[0]*(x**3) + p[1]*(x**2) + p[2]*x + p[3]
+	diff = data - predicted
+	diff = diff - diff.min()
+	diff = diff / diff.max()
+	diff = diff * 23
+	return diff
 
 
 
