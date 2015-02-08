@@ -51,14 +51,14 @@ body{
 	position: absolute;
 	height: 450px;
 	top: 0px;
-	width: 100%;
+	width: 7000px;
 	left: 0px;
 
 }
 .note{
 	height:15px;
 	position: absolute;
-	opacity: 0.5;
+	opacity: 0.2;
 	-webkit-transition: all 0.2s;
 	transition: all 0.2s;
 }
