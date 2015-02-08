@@ -24,7 +24,7 @@ def find_delta(data):
 
 def get_data(filename):
     data = read_data(filename)
-    return get_ma(data, 20)[0::10]
+    return get_ma(data, 20)[0::5]
 
 def get_delta(filename):
     data = read_data(filename)
