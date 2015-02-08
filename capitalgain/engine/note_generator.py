@@ -9,7 +9,6 @@ all_chords = ['664', '66', '6', '264', '26', '2', '364', '36', '3', '27', '37', 
 
 """Returns dict"""
 def get_chord_probs(previous_chords):
-	print "prev_chords = ", previous_chords
 	payload = {'cp':','.join(previous_chords)}
 	chords = requests.get('http://www.hooktheory.com/api/trends/stats', params=payload).json()
 	probs = {chord['chord_ID'] : chord['probability'] for chord in chords}
@@ -52,15 +51,18 @@ def generate_song(filename):
 	delta, count = get_duration(delta)
 	# Obtain first chord
 	song = [requests.get('http://www.hooktheory.com/api/trends/stats').json()[randint(0, 10)]['chord_ID']]
-
 	# Generate rest of song
 	for datapoint in delta:
 		song.append(get_best_chord(datapoint, song[-randint(1, 4):]))
-		#if len(song) % 8 == 0:
-		#	song[-1] = song[-1][0]
+		if song[-1].isdigit() and song[-1][-1] == '7' and len(song[-1]) == 2 and randint(0, 10) > 5:
+			song[-1] = song[0]
 		print song[-1]
 
 	return song, count
+
+def phil_use_this(filename):
+	song, count = generate_song(filename)
+	return [{'name':chord, 'dur':time} for chord, time in zip(song, count)]
 
 def fit_melody(filename):
 	data = get_data(filename)
@@ -73,7 +75,6 @@ def fit_melody(filename):
 	diff = diff / diff.max()
 	diff = diff * 23
 	return diff
-
 
 
 

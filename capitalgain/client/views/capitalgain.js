@@ -11,7 +11,6 @@ Template.capitalgain.events({
         }
     }
 });
-
 Template.capitalgain.rendered = function(){
   //console.log("resetting ticker");
   Session.set('ticker', null);
