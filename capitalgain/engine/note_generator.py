@@ -71,8 +71,7 @@ def phil_use_this(filename):
 	positivity = {chord_id:pos for pos, chord_id in enumerate(all_chords)}
 	return [{'name':chord, 'dur':time, '+/-':positivity[chord]} for chord, time in zip(song, count)]
 
-def fit_melody(filename):
-	data = get_data(filename)
+def fit_melody(data):
 	data = data[1:]
 	x = np.arange(len(data))
 	p = np.polyfit(x, data, 3)
@@ -85,7 +84,8 @@ def fit_melody(filename):
 
 def generate_melody(filename, chord_data):
 	melody = []
-	diffs = map(int, fit_melody(filename))
+	data, dynamics = get_data(filename)
+	diffs = map(int, fit_melody(data))
 	durations = [el['dur'] for el in chord_data]
 	durations = set(np.cumsum(durations))
 	durations.add(0)
@@ -105,7 +105,7 @@ def generate_melody(filename, chord_data):
 			pitch = possible_notes[index]
 			i += 1
 		melody.append(pitch)
-	return melody
+	return [{'note':val, 'vel':val2} for val, val2 in zip(melody, dynamics)]
 
 
 
