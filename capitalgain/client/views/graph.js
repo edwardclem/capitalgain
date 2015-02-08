@@ -11,6 +11,9 @@
 
 
   Template.graph.rendered = function(){
+    var filepath = musicData.findOne({ticker: Session.get('ticker')}).file;
+    var audio = new Audio(filepath);
+    audio.play();
     generateGraph();
   };
 
@@ -26,7 +29,10 @@ Template.graph.helpers({
   musicData: function(){
     return musicData.findOne({ticker: Session.get('ticker')});
 }});
-function generateGraph(data){
+
+
+
+function generateGraph(){
   datadoc = musicData.findOne({ticker: Session.get('ticker')});
   data = datadoc.musicdata
   console.log(data);
