@@ -8,9 +8,12 @@
   //     return Session.get("counter");
   //   }
   // });
+
+
   Template.graph.rendered = function(){
     generateGraph();
   };
+
   Template.graph.events({
     'click button': function () {
       // increment the counter when button is clicked
@@ -19,8 +22,12 @@
     }
   });
 
-
+Template.graph.helpers({
+  musicData: function(){
+    return musicData.findOne({ticker: Session.get('ticker')});
+}});
 function generateGraph(data){
+  console.log(musicData.findOne({ticker: Session.get('ticker')}));
   data = [
           [{'pitch':44,'dur':2,'time':0,'vel':90, 'happy': 20},
             {'pitch':48,'dur':2,'time':0,'vel':90, 'happy': 25},
@@ -56,8 +63,6 @@ function generateGraph(data){
       note.style.backgroundColor= happy[data[i][j]['happy']];
       datavis.appendChild(note);
     }
-    
-
   }
 }
 

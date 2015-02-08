@@ -1,25 +1,17 @@
-if (Meteor.isClient) {
-  // counter starts at 0
-  //Session.setDefault("counter", 0);
+Template.capitalgain.events({
+    'click button': function() {
+        //gets the stock ticker
+        var ticker = document.getElementById('search').value;
+        console.log(ticker);
 
-  // Template.home.helpers({
-  //   counter: function () {
-  //     return Session.get("counter");
-  //   }
-  // });
-
-  Template.capitalgain.events({
-    'click button': function () {
-      // increment the counter when button is clicked
-     // Session.set("counter", Session.get("counter") + 1);
-      Router.go('graph');
+        //checking if ticker has been entered and is valid...
+        if (ticker && musicData.findOne({ticker: ticker})){
+          Session.set('ticker', ticker);
+          Router.go('graph');
+        }
     }
-  });
-  
-}
-
-if (Meteor.isServer) {
-  Meteor.startup(function () {
-    // code to run on server at startup
-  });
+});
+Template.capitalgain.rendered = function(){
+  //console.log("resetting ticker");
+  Session.set('ticker', null);
 }
