@@ -51,7 +51,7 @@ function generateGraph() {
         '#4BD1AB', '#E7ED3B', '#3BD0ED', '#9156D1', '#5ABF1F', '#61EDE6'
     ];
     var datavis = document.getElementById("data-vis");
-    var absheight = datavis.clientHeight;
+    var absheight = 450;
     for (var h = 0; h < data.length; h++) {
         for (var i = 0; i < data[h].length; i++) {
             for (var j = 0; j < data[h][i].length; j++) {
