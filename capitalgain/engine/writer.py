@@ -28,9 +28,9 @@ def pitch_to_notes(notes):
         for note in notes[0]:
             note['pitch'] = notemap[note['pitch']] + 2*pitchup#map to scale, repitch to C3
         for note in notes[1]:
-            note['pitch'] = notemap[note['pitch']] + 3*pitchup #map to scale, repitch to C3
+            note['pitch'] = notemap[note['pitch']] + 3*pitchup - 3 #map to scale, repitch to C3
         for note in notes[2]:
-            note['pitch'] = notemap[note['pitch']] + 4*pitchup #map to scale, repitch to C3
+            note['pitch'] = notemap[note['pitch']] + 4*pitchup - 1 #map to scale, repitch to C3
     else:
         notes = notemap[notes] + 4*pitchup #map to scale, repitch to C3
     return notes
@@ -48,7 +48,7 @@ def chord_to_notes(chord,dur,posit,pos):
 
 def write_melody(melody):
     pos = 0
-    music = []
+    music = []  
     for note in melody:
         note['pitch'] = pitch_to_notes(note['pitch'])
         note['dur'] = 0.5
@@ -84,10 +84,10 @@ def send_visual(music, name):
     if db.musicdata.find_one({'ticker':name.upper()}) == None:
         visual = {'ticker':name.upper(),'file':'audio/'+name+'.mp3','musicdata':repack_visuals(music)}
         db.musicdata.insert(visual)
-        print('Visual sent.')
+        print('Visual database entry created.')
     else:
         db.musicdata.update({'ticker':name.upper()},{'$set':{'musicdata':repack_visuals(music)}})
-        print('Visual updated.')
+        print('Visual database entry updated.')
     return
 
 if __name__ == '__main__':
