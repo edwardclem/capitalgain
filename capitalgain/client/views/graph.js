@@ -27,18 +27,9 @@ Template.graph.helpers({
     return musicData.findOne({ticker: Session.get('ticker')});
 }});
 function generateGraph(data){
-  console.log(musicData.findOne({ticker: Session.get('ticker')}));
-  data = [
-          [{'pitch':44,'dur':2,'time':0,'vel':90, 'happy': 20},
-            {'pitch':48,'dur':2,'time':0,'vel':90, 'happy': 25},
-            {'pitch':51,'dur':2,'time':0,'vel':90, 'happy': 22}],
-          [{'pitch':56,'dur':2,'time':0,'vel':90, 'happy': 18}],
-          [{'pitch':51,'dur':2,'time':1,'vel':90, 'happy': 12},
-            {'pitch':55,'dur':2,'time':1,'vel':90, 'happy': 8},
-            {'pitch':58,'dur':2,'time':1,'vel':90, 'happy': 3}],
-          [{'pitch':58,'dur':4,'time':1,'vel':90, 'happy': 14}]
-
-          ];
+  datadoc = musicData.findOne({ticker: Session.get('ticker')});
+  data = datadoc.musicdata
+  console.log(data);
   min = 40;
   max = 70;
   happy = ['#06144F','#4A4B4D', '#091E73', '#656B85', '#7480AD', '#3B4B8A', '#213FB8',
