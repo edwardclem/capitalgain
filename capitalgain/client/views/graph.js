@@ -39,7 +39,7 @@ function generateGraph(data){
             '#B3154A', '#99264C', '#B3207D', '#E8159B', '#D052F2', '#C884DB', '#94D1F7',
             '#43B4FA', '#FA4383', '#89E34D', '#ED4037', '#BF54BC', '#A865BA'];
   var datavis = document.getElementById("data-vis");
-  console.log(datavis);
+  
   var absheight = datavis.clientHeight;
   for(var i= 0; i < data.length; i++){
     for(var j = 0; j < data[i].length; j++){
