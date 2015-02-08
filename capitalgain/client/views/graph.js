@@ -11,20 +11,24 @@
 
 
 
-  Template.graph.events({
-    'click button': function () {
-      // increment the counter when button is clicked
-     // Session.set("counter", Session.get("counter") + 1);
-      Router.go('capitalgain');
-    },
-    'click #play': function(){
-      console.log('play');
-      var filepath = musicData.findOne({ticker: Session.get('ticker')}).file;
+  Template.graph.rendered = function(){
+    console.log("rendered");
+    var filepath = musicData.findOne({ticker: Session.get('ticker')}).file;
     audio = new Audio(filepath);
-    audio.play();
     generateGraph();
+  };
 
+  Template.graph.events({
+    'click #playbutton': function(){
+      console.log('play');
+      if (!Session.get('playing')){
+      audio.play();   
+      console.log(audio.duration)
+      Session.set('playing', true);
+      animateGraph();
+      }
     }
+    
   });
 
 Template.graph.helpers({
@@ -33,6 +37,7 @@ Template.graph.helpers({
 }});
 
 function generateGraph(){
+  console.log("generating graph");
   datadoc = musicData.findOne({ticker: Session.get('ticker')});
   console.log(datadoc);
   data = datadoc.musicdata;
@@ -49,6 +54,7 @@ function generateGraph(){
   for(var i= 0; i < data.length; i++){
     for(var j = 0; j < data[i].length; j++){
       //create note div with id
+      //makeNote(data, i, j);
       var note = document.createElement("div");
       note.setAttribute("class", "note chord"+i);
       
@@ -58,10 +64,35 @@ function generateGraph(){
       
       var left = 10*(data[i][j]['time']);
       note.style.left = left+"px";
-      note.style.backgroundColor= happy[data[i][j]['+/-']];
+      if(i != 1){
+        note.style.backgroundColor= happy[data[i][j]['+/-']];  
+      }
+      else{
+        note.style.backgroundColor = "black";
+      }
       datavis.appendChild(note);
     }
   }
-}
 
+}
+function animateGraph(){
+  var scroll = document.getElementById("data-vis");
+  var left = scroll.offsetLeft - 5;
+  scroll.style.left = left + 'px';
+  //console.log(scroll.style.left);
+  setTimeout(animateGraph, 200);
+}
+function makeNote(data, row, col){
+  var note = document.createElement("div");
+  note.setAttribute("class", "note chord"+i);
+  
+  var ypos = absheight - 18*(data[row][col]['pitch'] - min);
+  note.style.top = ypos + 'px';
+  note.style.width = 10*(data[row][col]['dur']) + 'px';
+  
+  var left = 10*(data[row][col]['time']);
+  note.style.left = left+"px";
+  note.style.backgroundColor= happy[data[row][col]['+/-']];
+  datavis.appendChild(note);
+}
 
