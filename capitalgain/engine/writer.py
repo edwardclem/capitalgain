@@ -8,10 +8,10 @@ MIDIOut = MIDIFile(4)
 pitchup = 3
 
 def write_midi(song,stock):
-    MIDIOut.addTrackName(0,0,'Bass')
-    MIDIOut.addTrackName(1,0,'Fifth')
-    MIDIOut.addTrackName(2,0,'Chord')
-    MIDIOut.addTrackName(3,0,'Melody')
+    MIDIOut.addTrackName(0,0,stock+' Bass')
+    MIDIOut.addTrackName(1,0,stock+' Fifth')
+    MIDIOut.addTrackName(2,0,stock+' Chord')
+    MIDIOut.addTrackName(3,0,stock+' Melody')
     for t in range(0,4):
         for chord in song[t]:
             for note in chord:
