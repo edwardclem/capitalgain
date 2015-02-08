@@ -16,6 +16,7 @@
     var filepath = musicData.findOne({ticker: Session.get('ticker')}).file;
     audio = new Audio(filepath);
     generateGraph();
+    console.log(graphWidth());
   };
 
   Template.graph.events({
@@ -23,7 +24,6 @@
       console.log('play');
       if (!Session.get('playing')){
       audio.play();   
-      console.log(audio.duration)
       Session.set('playing', true);
       animateGraph();
       }
@@ -85,14 +85,32 @@ function generateGraph(){
 
 }
 
+function movementRate(){
+
+}
+
 function animateGraph(){
+  console.log(audio.duration);
   var duration = 15;
   interval = setInterval(moveGraph, duration);
+}
+
+//there's probably a more elegant way to do this.
+function graphWidth(){
+  datadoc = musicData.findOne({ticker: Session.get('ticker')});
+  //console.log(datadoc);
+  data = datadoc.musicdata;
+  var lastpoint = data[1][data[1].length - 1][0];
+  console.log(lastpoint);
+  var lasttime = lastpoint['time'];
+  var lastdur = lastpoint['dur']
+  return (lasttime + lastdur)*250
 }
 
 function moveGraph(){
   var scroll = document.getElementById("data-vis");
   console.log(audio.duration);
+  console.log(scroll.style.width);
   // var chord = document.getElementByClassName("chord"+i);
   // var fin = 0-chord.offsetLeft;
   // if(scroll.offsetLeft < fin){
@@ -103,7 +121,7 @@ function moveGraph(){
   //   chord.className+= "active";
   // }
   
-  var left = scroll.offsetLeft - (8);
+  var left = scroll.offsetLeft - (9.48);
   scroll.style.left = left + 'px';
   //console.log(scroll.style.left);
 }
