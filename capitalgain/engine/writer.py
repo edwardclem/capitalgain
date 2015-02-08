@@ -12,7 +12,7 @@ def write_midi(song,stock):
     MIDIOut.addTrackName(1,0,'Fifth')
     MIDIOut.addTrackName(2,0,'Chord')
     MIDIOut.addTrackName(3,0,'Melody')
-    for t in range(0,3):
+    for t in range(0,4):
         for chord in song[t]:
             for note in chord:
                 MIDIOut.addNote(t,1,note['pitch'],note['time'],note['dur'],note['vel'])
@@ -23,11 +23,14 @@ def write_midi(song,stock):
 
 def pitch_to_notes(notes):
     notemap = {1:1,2:3,3:5,4:6,4.5:7,5:8,5.5:9,6:10,7:12,8:13,9:15,10:17,11:18,12:20,13:22,14:24,15:25,16:27,17:29,18:30,19:32,20:34,21:36,22:37,23:39,24:41}
-    for note in notes[0]:
-        note['pitch'] = notemap[note['pitch']] + 2*pitchup#map to scale, repitch to C3
-    for note in notes[1]:
-        note['pitch'] = notemap[note['pitch']] + 3*pitchup #map to scale, repitch to C3
-    for note in notes[2]:
+    if(len(notes)>1):
+        for note in notes[0]:
+            note['pitch'] = notemap[note['pitch']] + 2*pitchup#map to scale, repitch to C3
+        for note in notes[1]:
+            note['pitch'] = notemap[note['pitch']] + 3*pitchup #map to scale, repitch to C3
+        for note in notes[2]:
+            note['pitch'] = notemap[note['pitch']] + 4*pitchup #map to scale, repitch to C3
+    else:
         note['pitch'] = notemap[note['pitch']] + 4*pitchup #map to scale, repitch to C3
     return notes
 
@@ -42,7 +45,15 @@ def chord_to_notes(chord,dur,posit,pos):
         p += 1
     return pitch_to_notes([bass,fifth,notes]) #array of notes: bass, fifth, inversion
 
-def write_chords(chords):
+def write_melody(melody):
+    pos = 0
+    notes = []
+    for note in melody:
+        notes.append({'pitch':pitch_to_notes(note),'dur':0.5,'time':pos,'vel':127})
+        pos += 0.5
+    return notes
+
+def write_chords(chords, melody):
     pos = 0
     song = [[],[],[]]
     for i in range(0,len(chords)):
@@ -54,10 +65,11 @@ def write_chords(chords):
         song[1].append(notes[1])
         song[2].append(notes[2])
         pos += chord['dur']
+    song.append(write_melody(melody))
     return song
 
 def repack_visuals(music):
-    music = music[2]
+    music = [music[2],music[3]]
     return music
 
 def send_visual(music, name):
@@ -75,7 +87,8 @@ def send_visual(music, name):
 if __name__ == '__main__':
     stock = 'aapl'
     testchords = phil_use_this('data/' + stock + '.us.txt')
-    testmusic = write_chords(testchords)
+    melody = generate_melody('data/' + stock + '.us.txt', testchords)
+    testmusic = write_chords(testchords, melody)
     print(testmusic)
     write_midi(testmusic,stock)
     send_visual(testmusic,stock)
