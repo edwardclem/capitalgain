@@ -82,11 +82,11 @@ function movementRate() {
 
 }
 
-function animateGraph() {
-    console.log(audio.duration);
-    var duration = 15;
-    interval = setInterval(moveGraph, duration);
-}
+// function animateGraph() {
+//     console.log(audio.duration);
+//     var duration = 15;
+//     interval = setInterval(moveGraph, duration);
+// }
 
 //there's probably a more elegant way to do this.
 function graphWidth() {
@@ -144,3 +144,4 @@ function animateGraph(i) {
         //console.log(scroll.style.left);
         setTimeout(animateGraph(i), 15);
     }
+  }
