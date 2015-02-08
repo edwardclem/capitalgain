@@ -18,6 +18,11 @@ if (Meteor.isClient) {
   //   }
   // });
 
+Template.graph.rendered = function(){
+  //console.log("rendered!");
+  //console.log(Session.get('ticker'));
+}
+
   Template.graph.events({
     'click button': function () {
       // increment the counter when button is clicked
@@ -27,15 +32,9 @@ if (Meteor.isClient) {
   });
 }
 
-function generateGraph(data){
-  for(int i= 0; i < data.length; i++){
-    for(int j = 0; j < data['pitch'].length; j++){
-      var note = $("<div class= 'note'>");
-      note.attr('class', 'chord'+i);
-
-    }
-    
-
+Template.graph.helpers({
+  musicData: function(){
+    return musicData.findOne({ticker: Session.get('ticker')});
   }
-}
+})
 
