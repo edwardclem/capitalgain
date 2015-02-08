@@ -26,13 +26,13 @@ def pitch_to_notes(notes):
     notemap = {1:1,2:3,3:5,4:6,4.5:7,5:8,5.5:9,6:10,7:12,8:13,9:15,10:17,11:18,12:20,13:22,14:24,15:25,16:27,17:29,18:30,19:32,20:34,21:36,22:37,23:39,24:41}
     if(isinstance(notes, list)):
         for note in notes[0]:
-            note['pitch'] = notemap[note['pitch']] + 24 #map to scale, repitch to C3
+            note['pitch'] = notemap[note['pitch']] + 24 + pitchup #map to scale, repitch to C3
         for note in notes[1]:
             note['pitch'] = notemap[note['pitch']] + 36 + pitchup #map to scale, repitch to C3
         for note in notes[2]:
             note['pitch'] = notemap[note['pitch']] + 48 + pitchup #map to scale, repitch to C3
     else:
-        notes = notemap[notes] + 4*pitchup #map to scale, repitch to C3
+        notes = notemap[notes] + 48 + pitchup #map to scale, repitch to C3
     return notes
 
 def chord_to_notes(chord,dur,posit,pos):

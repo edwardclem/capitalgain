@@ -63,8 +63,7 @@ def generate_song(filename):
 		song.append(get_best_chord(datapoint, song[-randint(1, 4):]))
 		if song[-1].isdigit() and song[-1][-1] == '7' and len(song[-1]) == 2 and randint(0, 10) > 5:
 			song[-1] = song[0]
-		print song[-1]
-
+		#print song[-1]
 	return song, count
 
 def phil_use_this(filename):
