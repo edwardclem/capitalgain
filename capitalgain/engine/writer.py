@@ -53,9 +53,9 @@ def write_melody(melody):
         note['pitch'] = pitch_to_notes(note['pitch'])
         note['dur'] = 0.5
         note['time'] = pos
-        list = []
-        list.append(note)
-        music.append(list)
+        song = []
+        song.append(note)
+        music.append(song)
         pos += 0.5
     return music
 
