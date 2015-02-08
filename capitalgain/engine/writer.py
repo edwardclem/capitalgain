@@ -62,4 +62,4 @@ def write_chords(chords):
 if __name__ == '__main__':
     testchords = phil_use_this('data/aapl.us.txt')
     print(write_chords(testchords))
-    write_midi(write_chords(testchords),'test')
+    write_midi(write_chords(testchords),'test2')
