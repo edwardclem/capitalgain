@@ -62,7 +62,8 @@ def generate_song(filename):
 
 def phil_use_this(filename):
 	song, count = generate_song(filename)
-	return [{'name':chord, 'dur':time} for chord, time in zip(song, count)]
+	positivity = {chord_id:pos for pos, chord_id in enumerate(all_chords)}
+	return [{'name':chord, 'dur':time, '+/-':positivity[chord]} for chord, time in zip(song, count)]
 
 def fit_melody(filename):
 	data = get_data(filename)
@@ -80,6 +81,12 @@ def generate_melody(filename, chord_data):
 	diffs = fit_melody(filename)
 	durations = [el['dur'] for el in chord_data]
 	durations = set(np.cumsum(durations))
+	for val in diffs:
+		closest_pitch = int(val) # find closest pitch some other way?
+		#if len(melody) / 2 in durations:
+		#	closest_pitch = # find closest pitch in chord somehow
+		melody.append(closest_pitch)
+
 
 
 
