@@ -36,6 +36,16 @@ h1{
 	margin-left: auto;
 	width: 50%;
 }
+a{
+	margin-top: 20px;
+	display: block;
+	margin-left: 30%;
+	font-family: Quicksand;
+	font-weight: 300;
+	text-decoration: none;
+	font-size: 20px;
+	color: white;
+}
 input{
 	outline: none;
 	padding: 5px;
