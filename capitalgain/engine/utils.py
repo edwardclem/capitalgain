@@ -42,6 +42,7 @@ def get_delta(filename):
     delta = delta / max(delta) * 30
     return delta
 
+"""
 import matplotlib.pyplot as plt
 # For debugging purposes
 def visualize(data):
@@ -51,4 +52,4 @@ def visualize(data):
     plt.scatter(x, data)
     plt.plot(x, predicted)
     plt.show()
-
+"""

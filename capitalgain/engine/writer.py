@@ -95,6 +95,7 @@ if __name__ == '__main__':
     stock = 'aapl'
     if (len(sys.argv) == 2):
         stock = sys.argv[1]
+    print('Analyzing ' + stock.upper())
     testchords = phil_use_this('data/' + stock + '.us.txt')
     melody = generate_melody('data/' + stock + '.us.txt', testchords)
     testmusic = write_chords(testchords, melody)
