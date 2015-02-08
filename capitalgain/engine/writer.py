@@ -13,23 +13,37 @@ def write_midi(song,stock):
     for t in range(0,3):
         for chord in song[t]:
             for note in chord:
-                MIDIOut.addNote(t,1,note['pitch']+36,note['time'],note['dur'],note['vel'])
+                MIDIOut.addNote(t,1,note['pitch'],note['time'],note['dur'],note['vel'])
     binfile = open(stock+'.mid', 'wb')
     MIDIOut.writeFile(binfile)
     binfile.close()
     return
 
+def pitch_to_notes(notes):
+    notemap = {1:1,2:3,3:5,4:6,4.5:7,5:8,5.5:9,6:10,7:12,8:13,9:15,10:17,11:18,12:20}
+    for note in notes[0]:
+        print(note['pitch'])
+        note['pitch'] = notemap[note['pitch']] + 24 #map to scale, repitch to C3
+    for note in notes[1]:
+        print(note['pitch'])
+        note['pitch'] = notemap[note['pitch']] + 36 #map to scale, repitch to C3
+    for note in notes[2]:
+        print(note['pitch'])
+        note['pitch'] = notemap[note['pitch']] + 48 #map to scale, repitch to C3
+    return notes
+
 def chord_to_notes(chord,dur,pos):
     notes = []
     print(chord + str(dur) + str(pos))
     pitches = theory[chord]
-    bass = [{'pitch':(pitches[0]-16),'dur':dur,'time':pos,'vel':127}] #bass
-    fifth = [{'pitch':(pitches[0]-8),'dur':dur,'time':pos,'vel':127},{'pitch':(pitches[0]-3),'dur':dur,'time':pos,'vel':127}]
+    bass = [{'pitch':(pitches[0]),'dur':dur,'time':pos,'vel':127}] #bass
+    fifth = [{'pitch':(pitches[0]),'dur':dur,'time':pos,'vel':127},{'pitch':(pitches[0]+4),'dur':dur,'time':pos,'vel':127}]
     for p in range(1,len(pitches)):
         pitch = pitches[p]
         notes.append({'pitch':pitch,'dur':dur,'time':pos,'vel':127}) #chord
         p += 1
-    return [bass,fifth,notes] #array of notes: bass, fifth, inversion
+    print([bass,fifth,notes])
+    return pitch_to_notes([bass,fifth,notes]) #array of notes: bass, fifth, inversion
 
 def write_chords(chords):
     pos = 0
