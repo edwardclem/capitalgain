@@ -3,5 +3,5 @@ Router.map( function () {
 });
 
 Router.map(function(){
-	this.route('graph', {path: '/graph'});
+	this.route('graph', {path: '/graph'}, {data: {test: 'test'}});
 });
