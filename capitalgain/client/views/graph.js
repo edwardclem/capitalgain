@@ -10,18 +10,20 @@
   // });
 
 
-  Template.graph.rendered = function(){
-    var filepath = musicData.findOne({ticker: Session.get('ticker')}).file;
-    audio = new Audio(filepath);
-    audio.play();
-    generateGraph();
-  };
 
   Template.graph.events({
     'click button': function () {
       // increment the counter when button is clicked
      // Session.set("counter", Session.get("counter") + 1);
       Router.go('capitalgain');
+    },
+    'click #play': function(){
+      console.log('play');
+      var filepath = musicData.findOne({ticker: Session.get('ticker')}).file;
+    audio = new Audio(filepath);
+    audio.play();
+    generateGraph();
+
     }
   });
 
