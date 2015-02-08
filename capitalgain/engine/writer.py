@@ -1,6 +1,6 @@
 #!usr/bin/env python
 import os
-import midiutil
+from midiutil.MidiFile import *
 from note_generator import phil_use_this
 theory = {'1':[1,1,3,5],'4':[4,4,6,8],'6':[6,6,8,10],'5':[5,5,7,9],'2':[2,2,4,6],'3':[3,3,5,7],'27':[2,2,4,6,8],'47':[4,4,6,8,10],'67':[6,6,8,10,12],'16':[1,3,5,8],'56':[5,7,9,12],'164':[1,5,8,10],'b7':[7,7,9,11],'57':[5,5,7,9,11],'37':[3,3,5,7,9],'5/5':[5,2,4.5,6],'17':[1,1,3,5,7],'464':[4,1,4,6],'664':[6,3,6,8],'564':[5,2,5,7],'46':[4,6,8,11],'57/6':[5,3,5.5,7,9],'66':[6,1,3,6],'36':[3,5,7,10]}
 MIDIOut = MIDIFile(4)
@@ -46,6 +46,6 @@ def write_chords(chords):
     return song
 
 if __name__ == '__main__':
-    testchords = phil_use_this()
+    testchords = phil_use_this('data/aapl.us.txt')
     print(write_chords(testchords))
     write_midi(write_chords(testchords),'test')
