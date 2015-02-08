@@ -20,7 +20,7 @@ def write_midi(song,stock):
     return
 
 def pitch_to_notes(notes):
-    notemap = {1:1,2:3,3:5,4:6,4.5:7,5:8,5.5:9,6:10,7:12,8:13,9:15,10:17,11:18,12:20}
+    notemap = {1:1,2:3,3:5,4:6,4.5:7,5:8,5.5:9,6:10,7:12,8:13,9:15,10:17,11:18,12:20,13:22,14:24,15:25,16:27,17:29,18:30,19:32,20:34,21:36,22:37,23:39,24:41}
     for note in notes[0]:
         note['pitch'] = notemap[note['pitch']] + 24 #map to scale, repitch to C3
     for note in notes[1]:
@@ -29,14 +29,14 @@ def pitch_to_notes(notes):
         note['pitch'] = notemap[note['pitch']] + 48 #map to scale, repitch to C3
     return notes
 
-def chord_to_notes(chord,dur,pos):
+def chord_to_notes(chord,dur,posit,pos):
     notes = []
     pitches = theory[chord]
-    bass = [{'pitch':(pitches[0]),'dur':dur,'time':pos,'vel':127}] #bass
-    fifth = [{'pitch':(pitches[0]),'dur':dur,'time':pos,'vel':127},{'pitch':(pitches[0]+4),'dur':dur,'time':pos,'vel':127}]
+    bass = [{'pitch':(pitches[0]),'dur':dur,'time':pos,'+/-':posit,'vel':127}] #bass
+    fifth = [{'pitch':(pitches[0]),'dur':dur,'time':pos,'+/-':posit,'vel':127},{'pitch':(pitches[0]+4),'dur':dur,'time':pos,'vel':127}]
     for p in range(1,len(pitches)):
         pitch = pitches[p]
-        notes.append({'pitch':pitch,'dur':dur,'time':pos,'vel':127}) #chord
+        notes.append({'pitch':pitch,'dur':dur,'time':pos,'+/-':posit,'vel':127}) #chord
         p += 1
     return pitch_to_notes([bass,fifth,notes]) #array of notes: bass, fifth, inversion
 
@@ -46,7 +46,7 @@ def write_chords(chords):
     for i in range(0,len(chords)):
         chord = chords[i]
         #get notes
-        notes = chord_to_notes(chord['name'],chord['dur'],pos)
+        notes = chord_to_notes(chord['name'],chord['dur'],chord['+/-'],pos)
         #add notes at pos
         song[0].append(notes[0])
         song[1].append(notes[1])
@@ -56,7 +56,6 @@ def write_chords(chords):
 
 def repack_visuals(music):
     music = music[2]
-
     return music
 
 def send_visual(music, name):
