@@ -42,3 +42,13 @@ def get_delta(filename):
     delta = delta / max(delta) * 30
     return delta
 
+import matplotlib.pyplot as plt
+# For debugging purposes
+def visualize(data):
+    x = np.arange(len(data))
+    p = np.polyfit(x, data, 3)
+    predicted = p[0]*(x**3) + p[1]*(x**2) + p[2]*x + p[3]
+    plt.scatter(x, data)
+    plt.plot(x, predicted)
+    plt.show()
+

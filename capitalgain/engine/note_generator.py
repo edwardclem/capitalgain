@@ -52,11 +52,12 @@ def get_best_chord(index, previous_chords):
 	return best_chord
 
 def generate_song(filename):
+	# Generate data
 	delta = get_delta(filename)
 	delta = map(int, delta)
 	delta, count = get_duration(delta)
-	# Obtain first chord
-	song = [requests.get('http://www.hooktheory.com/api/trends/stats').json()[randint(0, 10)]['chord_ID']]
+	# Set first chord
+	song = ['1']
 	# Generate rest of song
 	for datapoint in delta:
 		song.append(get_best_chord(datapoint, song[-randint(1, 4):]))
@@ -105,7 +106,7 @@ def generate_melody(filename, chord_data):
 			pitch = possible_notes[index]
 			i += 1
 		melody.append(pitch)
-	return [{'note':val, 'vel':val2} for val, val2 in zip(melody, dynamics)]
+	return [{'note':m, 'vel':d, 'val':p} for m, d, p in zip(melody, dynamics, data[1:])]
 
 
 

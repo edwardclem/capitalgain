@@ -49,38 +49,53 @@ function generateGraph(){
             '#1C857A', '#157A99', '#6C3E96', '#10A6AD', '#AD104F', '#6155E6', '#1D8539',
             '#4BD1AB', '#E7ED3B', '#3BD0ED', '#9156D1', '#5ABF1F', '#61EDE6'];
   var datavis = document.getElementById("data-vis");
-  
   var absheight = datavis.clientHeight;
-  for(var i= 0; i < data.length; i++){
-    for(var j = 0; j < data[i].length; j++){
-      //create note div with id
-      //makeNote(data, i, j);
-      var note = document.createElement("div");
-      note.setAttribute("class", "note chord"+i);
-      
-      var ypos = absheight - 18*(data[i][j]['pitch'] - min);
-      note.style.top = ypos + 'px';
-      note.style.width = 10*(data[i][j]['dur']) + 'px';
-      
-      var left = 10*(data[i][j]['time']);
-      note.style.left = left+"px";
-      if(i != 1){
-        note.style.backgroundColor= happy[data[i][j]['+/-']];  
+  var pixratio = ((128/60)*(audio.duration));
+  console.log(pixratio);
+  for(var h = 0; h < data.length; h++){
+    for(var i= 0; i < data[h].length; i++){
+      for(var j = 0; j < data[h][i].length; j++){
+        //create note div with id
+        //makeNote(data, i, j);
+        var note = document.createElement("div");
+        note.setAttribute("class", "note chord"+i);
+        
+        var ypos = absheight - 18*(data[h][i][j]['pitch'] - min);
+        note.style.top = ypos + 'px';
+        note.style.width = 250*(data[h][i][j]['dur']) + 'px';
+        
+        var left = 250*(data[h][i][j]['time']);
+        note.style.left = left+"px";
+        if(h != 1){
+          note.style.backgroundColor= happy[data[h][i][j]['+/-']];  
+        }
+        else{
+          note.style.backgroundColor = "black";
+        }
+        datavis.appendChild(note);
       }
-      else{
-        note.style.backgroundColor = "black";
-      }
-      datavis.appendChild(note);
     }
   }
+  
 
 }
 function animateGraph(){
   var scroll = document.getElementById("data-vis");
-  var left = scroll.offsetLeft - 5;
+  console.log(audio.duration);
+  // var chord = document.getElementByClassName("chord"+i);
+  // var fin = 0-chord.offsetLeft;
+  // if(scroll.offsetLeft < fin){
+  //   i++;
+  //   chord.className.replace( /(?:^|\s)active(?!\S)/g , '' );
+  // }
+  // else if (!(chord.className.match(/(?:^|\s)active(?!\S)/))){
+  //   chord.className+= "active";
+  // }
+  
+  var left = scroll.offsetLeft - (8);
   scroll.style.left = left + 'px';
   //console.log(scroll.style.left);
-  setTimeout(animateGraph, 200);
+  setTimeout(animateGraph, 15);
 }
 function makeNote(data, row, col){
   var note = document.createElement("div");
