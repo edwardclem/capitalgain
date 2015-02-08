@@ -71,9 +71,10 @@ function generateGraph(){
 }
 function animateGraph(){
   var scroll = document.getElementById("data-vis");
-  scroll.style.left = (scroll.style.left - 10) + 'px';
-  //console.log('animate dammit!');
-  setTimeout(animateGraph, 20);
+  var left = scroll.offsetLeft - 5;
+  scroll.style.left = left + 'px';
+  //console.log(scroll.style.left);
+  setTimeout(animateGraph, 200);
 }
 function makeNote(data, row, col){
   var note = document.createElement("div");
