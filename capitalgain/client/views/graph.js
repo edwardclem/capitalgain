@@ -12,7 +12,7 @@
 
   Template.graph.rendered = function(){
     var filepath = musicData.findOne({ticker: Session.get('ticker')}).file;
-    var audio = new Audio(filepath);
+    audio = new Audio(filepath);
     audio.play();
     generateGraph();
     animateGraph();

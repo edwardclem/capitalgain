@@ -1,13 +1,13 @@
 import numpy as np
 
-def read_data(filename):
+def read_data(filename, col=4):
     data = []
     with open(filename) as f:
         f.readline()
         string = f.readline()
         while (string):
             split_string = string.split(',')
-            data.append(float(split_string[4]))
+            data.append(float(split_string[col]))
             string = f.readline()
     return data[-2580:]
 
@@ -22,9 +22,17 @@ def find_delta(data):
     delta = delta / top
     return delta
 
+def get_variance(data):
+    var = np.array([np.var(data[i:i+5]) for i in range(1, len(data) - 15, 5)])
+    std = var**(0.5)
+    std = std / std.max() * 64 + 63
+    return std
+
+
 def get_data(filename):
     data = read_data(filename)
-    return get_ma(data, 20)[0::5]
+    ma = get_ma(data, 20)
+    return ma[0::5], get_variance(ma)
 
 def get_delta(filename):
     data = read_data(filename)
