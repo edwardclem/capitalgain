@@ -58,20 +58,23 @@ function generateGraph() {
                 //create note div with id
                 //makeNote(data, i, j);
                 var note = document.createElement("div");
-                note.setAttribute("class", "note chord" + i);
-
-
+                note.setAttribute("class", "note");
                 var ypos = absheight - 18 * (data[h][i][j]['pitch'] - min);
                 note.style.top = ypos + 'px';
                 note.style.width = 250 * (data[h][i][j]['dur']) + 'px';
 
                 var left = 250 * (data[h][i][j]['time']);
                 note.style.left = left + "px";
+                
                 if (h != 1) {
                     note.style.backgroundColor = happy[data[h][i][j]['+/-']];
-                } else {
-                    note.style.backgroundColor = "black";
+                    
                 }
+                else{
+                  note.style.backgroundColor = "#212C5C";
+
+                }
+               
                 datavis.appendChild(note);
             }
 
@@ -86,16 +89,6 @@ function animateGraph(){
   interval = setInterval(moveGraph, 15);   
  
 }
-
-function movementRate() {
-
-}
-
-// function animateGraph() {
-//     console.log(audio.duration);
-//     var duration = 15;
-//     interval = setInterval(moveGraph, duration);
-// }
 
 //there's probably a more elegant way to do this.
 function graphWidth() {
@@ -113,8 +106,6 @@ function graphWidth() {
 
 function moveGraph() {
     var scroll = document.getElementById("data-vis");
-    console.log(audio.duration);
-    console.log(scroll.style.width);
     // var chord = document.getElementByClassName("chord"+i);
     // var fin = 0-chord.offsetLeft;
     // if(scroll.offsetLeft < fin){
