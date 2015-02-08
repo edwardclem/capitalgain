@@ -6,7 +6,6 @@ from random import randint
 from utils import get_data, get_delta
 
 all_chords = ['664', '66', '6', '264', '26', '2', '364', '36', '3', '27', '37', '67', 'b7', '47', '57', '17', '5/5', '464', '46', '4', '564', '56', '5', '164', '16', '1']
-to_write = []
 
 """Returns dict"""
 def get_chord_probs(previous_chords):
@@ -42,8 +41,6 @@ def get_best_chord(index, previous_chords):
 			if prob > max_prob:
 				max_prob = prob
 				best_chord = chord
-		else:
-			to_write.append(chord)
 	if not best_chord: # suuuuper hacky
 		best_chord = get_best_chord(index, previous_chords[-len(previous_chords) + 1:])
 	return best_chord
@@ -54,20 +51,13 @@ def generate_song(filename):
 	delta, count = get_duration(delta)
 	# Obtain first chord
 	song = [requests.get('http://www.hooktheory.com/api/trends/stats').json()[randint(0, 10)]['chord_ID']]
-
 	# Generate rest of song
 	for datapoint in delta:
 		song.append(get_best_chord(datapoint, song[-randint(1, 4):]))
-		#if len(song) % 8 == 0:
-		#	song[-1] = song[-1][0]
+		if song[-1].isdigit() and song[-1][-1] == '7' and len(song[-1]) == 2 and randint(0, 10) > 5:
+			song[-1] = song[0]
 		print song[-1]
 
-	# DEBUG
-	to_write = set(to_write)
-	with open('new_chords.txt', 'w') as f:
-		for el in to_write:
-			f.write(el + '\n')
-	# DEBUG End
 	return song, count
 
 def phil_use_this(filename):
