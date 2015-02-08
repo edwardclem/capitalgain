@@ -35,7 +35,7 @@ body{
 #vis-container{
 	position: absolute;
 	top: 190px;
-	background-color: black;
+	background-color: white;
 	width: 90%;
 	height: 450px;
 	left: 30px;
@@ -43,6 +43,8 @@ body{
 #data-vis{
 	position: absolute;
 	height: 450px;
+	top: 0px;
+	width: 100%;
 
 }
 .note{
