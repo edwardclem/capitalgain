@@ -6,6 +6,12 @@ from random import randint
 from utils import get_data, get_delta
 # 264, 26, 364 disallowed
 all_chords = ['664', '66', '6', '2', '36', '3', '27', '37', '67', 'b7', '47', '57', '17', '5/5', '464', '46', '4', '564', '56', '5', '164', '16', '1']
+theory = {'1':[1,1,3,5],'4':[4,4,6,8],'6':[6,6,8,10],'5':[5,5,7,9],'2':[2,2,4,6],
+			'3':[3,3,5,7],'27':[2,2,4,6,8],'47':[4,4,6,8,10],'67':[6,6,8,10,12],
+			'16':[1,3,5,8],'56':[5,7,9,12],'164':[1,5,8,10],'b7':[7,7,9,11],
+			'57':[5,5,7,9,11],'37':[3,3,5,7,9],'5/5':[5,2,4.5,6],'17':[1,1,3,5,7],
+			'464':[4,1,4,6],'664':[6,3,6,8],'564':[5,2,5,7],'46':[4,6,8,11],
+			'57/6':[5,3,5.5,7,9],'66':[6,1,3,6],'36':[3,5,7,10]}
 
 """Returns dict"""
 def get_chord_probs(previous_chords):
@@ -74,18 +80,29 @@ def fit_melody(filename):
 	diff = data - predicted
 	diff = diff - diff.min()
 	diff = diff / diff.max()
-	diff = diff * 23
+	diff = diff * 23 + 1
 	return diff
 
 def generate_melody(filename, chord_data):
-	diffs = fit_melody(filename)
+	diffs = map(int, fit_melody(filename))
 	durations = [el['dur'] for el in chord_data]
 	durations = set(np.cumsum(durations))
-	for val in diffs:
-		closest_pitch = int(val) # find closest pitch some other way?
-		#if len(melody) / 2 in durations:
-		#	closest_pitch = # find closest pitch in chord somehow
-		melody.append(closest_pitch)
+	i = 0
+	for pitch in diffs:
+		if len(melody) / 2 in durations:
+			chord = chord_data[i]['name']
+			notes = theory[chord]
+			possible_notes = []
+			for note in notes:
+				scale = 0
+				while note + scale <= 24:
+					possible_notes.append(note)
+					scale += 8
+			dist = np.array(possible_notes) - closest_pitch
+			index = np.argmin(dist)
+			pitch = possible_notes[index]
+			i += 1
+		melody.append(pitch)
 
 
 
