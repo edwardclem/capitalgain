@@ -27,6 +27,11 @@
       Session.set('playing', true);
       animateGraph();
       }
+      else{
+        Session.set('playing', false);
+        audio.pause();
+        clearInterval(interval);
+      }
     }
     
   });
@@ -79,7 +84,13 @@ function generateGraph(){
   
 
 }
+
 function animateGraph(){
+  var duration = 15;
+  interval = setInterval(moveGraph, duration);
+}
+
+function moveGraph(){
   var scroll = document.getElementById("data-vis");
   console.log(audio.duration);
   // var chord = document.getElementByClassName("chord"+i);
@@ -95,7 +106,6 @@ function animateGraph(){
   var left = scroll.offsetLeft - (8);
   scroll.style.left = left + 'px';
   //console.log(scroll.style.left);
-  setTimeout(animateGraph, 15);
 }
 function makeNote(data, row, col){
   var note = document.createElement("div");

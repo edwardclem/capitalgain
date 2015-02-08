@@ -17,4 +17,6 @@ Template.capitalgain.rendered = function(){
   Session.set('ticker', null);
   audio.pause();
   audio = null;
+  clearInterval(interval);
+  interval = null;
 }
