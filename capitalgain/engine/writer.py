@@ -90,8 +90,11 @@ def send_visual(music, name):
         print('Visual database entry updated.')
     return
 
+import sys
 if __name__ == '__main__':
     stock = 'aapl'
+    if (len(sys.argv) == 2):
+        stock = sys.argv[1]
     testchords = phil_use_this('data/' + stock + '.us.txt')
     melody = generate_melody('data/' + stock + '.us.txt', testchords)
     testmusic = write_chords(testchords, melody)
