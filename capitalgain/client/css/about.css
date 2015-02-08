@@ -8,7 +8,19 @@
 	font-weight: 300;
 	background-color: black;
 }
-h1{
+#background-img-about{
+	padding: 0px;
+	margin: 0px;
+	position: absolute;
+	top: 0px;
+	left: 0px;
+	right: 0px;
+	height: 100%;
+	background-color: black;
+	background-image: url('images/music-background-2.jpg');
+	background-repeat: repeat-x;
+}
+#howitworks{
 	color: white;
 	font-size: 40px;
 	position: absolute;
