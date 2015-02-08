@@ -44,6 +44,8 @@ body{
 	width: 90%;
 	height: 450px;
 	left: 30px;
+	overflow: scroll;
+	margin-bottom: 50px;
 }
 #data-vis{
 	position: absolute;
