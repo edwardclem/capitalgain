@@ -125,7 +125,7 @@ function moveGraph() {
     //   chord.className+= "active";
     // }
 
-    var left = scroll.offsetLeft - (9.48);
+    var left = scroll.offsetLeft - (10);
     scroll.style.left = left + 'px';
     //console.log(scroll.style.left);
 }
