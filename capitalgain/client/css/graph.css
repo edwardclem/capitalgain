@@ -42,14 +42,14 @@ body{
 	top: 220px;
 	background-color: white;
 	width: 90%;
-	height: 450px;
+	height: 700px;
 	left: 30px;
 	overflow: scroll;
 	margin-bottom: 50px;
 }
 #data-vis{
 	position: absolute;
-	height: 450px;
+	height: 700px;
 	top: 0px;
 	/*width: 100%;*/
 	left: 0px;
