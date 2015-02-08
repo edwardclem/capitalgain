@@ -84,12 +84,14 @@ def fit_melody(filename):
 	return diff
 
 def generate_melody(filename, chord_data):
+	melody = []
 	diffs = map(int, fit_melody(filename))
 	durations = [el['dur'] for el in chord_data]
 	durations = set(np.cumsum(durations))
+	durations.add(0)
 	i = 0
 	for pitch in diffs:
-		if len(melody) / 2 in durations:
+		if len(melody) / 2. in durations and i < len(chord_data):
 			chord = chord_data[i]['name']
 			notes = theory[chord]
 			possible_notes = []
@@ -98,11 +100,12 @@ def generate_melody(filename, chord_data):
 				while note + scale <= 24:
 					possible_notes.append(note)
 					scale += 8
-			dist = np.array(possible_notes) - closest_pitch
+			dist = np.array(possible_notes) - pitch
 			index = np.argmin(dist)
 			pitch = possible_notes[index]
 			i += 1
 		melody.append(pitch)
+	return melody
 
 
 
