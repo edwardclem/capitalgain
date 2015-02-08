@@ -1,0 +1,64 @@
+/* CSS declarations go here */
+h1{
+	color: white;
+	font-size: 65px;
+	font-family: Quicksand;
+	font-weight: 400;
+	margin-left: auto;
+	margin-right: auto;
+	position: relative;
+	/*margin-top: 17%;*/
+	width: 42%;
+}
+#background-img{
+	padding: 0px;
+	margin: 0px;
+	position: absolute;
+	top: 0px;
+	left: 0px;
+	right: 0px;
+	height: 100%;
+	background-color: black;
+	background-image: url('images/music-background-2.jpg');
+	background-repeat: repeat-x;
+}
+#info-bar{
+	margin-top: 25%;
+	background-color: black;
+	position: relative;
+	z-index: 1;
+	margin-left: -10px;
+	width: 108%;
+	height: 300px;
+}
+#search-bar{
+	margin-right: auto;
+	margin-left: auto;
+	width: 50%;
+}
+input{
+	outline: none;
+	padding: 5px;
+}
+#search{
+	width: 80%;
+	height: 30px;
+	font-size: 20px;
+	margin-right: 20px;
+	border: 2px solid black;
+	border-radius: 3px;
+	color: white;
+	
+}
+button{
+	position: absolute;
+	margin-top: 3px;
+	width: 50px;
+	height: 40px;
+	outline: none;
+	border: 2px solid black;
+	border-radius: 5px;
+}
+button:hover{
+	cursor: pointer;
+}
