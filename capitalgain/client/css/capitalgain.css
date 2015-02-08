@@ -60,7 +60,11 @@ button{
 	border-radius: 5px;
 	font-family: Abel;
 	font-size: 25px;
+	-webkit-transition: all 2s;
+	transition: all 2s;
 }
 button:hover{
 	cursor: pointer;
+	background-color: blue;
+	color: white;
 }
