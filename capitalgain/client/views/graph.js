@@ -30,18 +30,17 @@ Template.graph.helpers({
     return musicData.findOne({ticker: Session.get('ticker')});
 }});
 
-
-
 function generateGraph(){
   datadoc = musicData.findOne({ticker: Session.get('ticker')});
-  data = datadoc.musicdata
+  console.log(datadoc);
+  data = datadoc.musicdata;
   console.log(data);
-  min = 40;
+  min = 60;
   max = 70;
-  happy = ['#06144F','#4A4B4D', '#091E73', '#656B85', '#7480AD', '#3B4B8A', '#213FB8',
-            '#2A806C', '#2ABD9A', '#1DB86A', '#1F9135', '#0AC42F', '#7ECF15', '#E8E520',
-            '#B3154A', '#99264C', '#B3207D', '#E8159B', '#D052F2', '#C884DB', '#94D1F7',
-            '#43B4FA', '#FA4383', '#89E34D', '#ED4037', '#BF54BC', '#A865BA'];
+  happy = ['#081A45','#18409E', '#7C828F', '#3B3E45', '#382E5C', '#0E453F', '#0B3B0F',
+            '#0B4480', '#5C0F28', '#2F2952', '#492969', '#70215B', '#338238', '#328A88',
+            '#1C857A', '#157A99', '#6C3E96', '#10A6AD', '#AD104F', '#6155E6', '#1D8539',
+            '#4BD1AB', '#E7ED3B', '#3BD0ED', '#9156D1', '#5ABF1F', '#61EDE6'];
   var datavis = document.getElementById("data-vis");
   
   var absheight = datavis.clientHeight;
@@ -51,15 +50,16 @@ function generateGraph(){
       var note = document.createElement("div");
       note.setAttribute("class", "note chord"+i);
       
-      var ypos = absheight - 15*(data[i][j]['pitch'] - min);
+      var ypos = absheight - 18*(data[i][j]['pitch'] - min);
       note.style.top = ypos + 'px';
-      note.style.width = data[i][j]['dur']*30 + 'px';
-
-      var left = 40*data[i][j]['time'];
+      note.style.width = 10*(data[i][j]['dur']) + 'px';
+      
+      var left = 10*(data[i][j]['time']);
       note.style.left = left+"px";
-      note.style.backgroundColor= happy[data[i][j]['happy']];
+      note.style.backgroundColor= happy[data[i][j]['+/-']];
       datavis.appendChild(note);
     }
   }
 }
+
 
