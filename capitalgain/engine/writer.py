@@ -15,7 +15,7 @@ def write_midi(song,stock):
     for t in range(0,4):
         for chord in song[t]:
             for note in chord:
-                MIDIOut.addNote(t,1,note['pitch'],note['time'],note['dur'],note['vel'])
+                MIDIOut.addNote(t,1,int(note['pitch']),note['time'],note['dur'],int(note['vel']))
     binfile = open(stock+'.mid', 'wb')
     MIDIOut.writeFile(binfile)
     binfile.close()
@@ -48,13 +48,16 @@ def chord_to_notes(chord,dur,posit,pos):
 
 def write_melody(melody):
     pos = 0
+    music = []
     for note in melody:
         note['pitch'] = pitch_to_notes(note['pitch'])
         note['dur'] = 0.5
         note['time'] = pos
+        list = []
+        list.append(note)
+        music.append(list)
         pos += 0.5
-    print(melody)
-    return notes
+    return music
 
 def write_chords(chords, melody):
     pos = 0
