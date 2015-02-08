@@ -4,8 +4,8 @@ from scipy.stats import norm
 import requests
 from random import randint
 from utils import get_data, get_delta
-
-all_chords = ['664', '66', '6', '264', '26', '2', '364', '36', '3', '27', '37', '67', 'b7', '47', '57', '17', '5/5', '464', '46', '4', '564', '56', '5', '164', '16', '1']
+# 264, 26, 364 disallowed
+all_chords = ['664', '66', '6', '2', '36', '3', '27', '37', '67', 'b7', '47', '57', '17', '5/5', '464', '46', '4', '564', '56', '5', '164', '16', '1']
 
 """Returns dict"""
 def get_chord_probs(previous_chords):
@@ -67,7 +67,7 @@ def phil_use_this(filename):
 def fit_melody(filename):
 	data = get_data(filename)
 	data = data[1:]
-	x = np.arange(256)
+	x = np.arange(len(data))
 	p = np.polyfit(x, data, 3)
 	predicted = p[0]*(x**3) + p[1]*(x**2) + p[2]*x + p[3]
 	diff = data - predicted
@@ -75,6 +75,11 @@ def fit_melody(filename):
 	diff = diff / diff.max()
 	diff = diff * 23
 	return diff
+
+def generate_melody(filename, chord_data):
+	diffs = fit_melody(filename)
+	durations = [el['dur'] for el in chord_data]
+	durations = set(np.cumsum(durations))
 
 
 
