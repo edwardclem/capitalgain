@@ -27,10 +27,12 @@ Template.graph.helpers({
     return musicData.findOne({ticker: Session.get('ticker')});
 }});
 function generateGraph(data){
+
   datadoc = musicData.findOne({ticker: Session.get('ticker')});
+  console.log(datadoc);
   data = datadoc.musicdata;
   console.log(data);
-  min = 40;
+  min = 60;
   max = 70;
   happy = ['#081A45','#18409E', '#7C828F', '#3B3E45', '#382E5C', '#0E453F', '#0B3B0F',
             '#0B4480', '#5C0F28', '#2F2952', '#492969', '#70215B', '#338238', '#328A88',
@@ -45,15 +47,16 @@ function generateGraph(data){
       var note = document.createElement("div");
       note.setAttribute("class", "note chord"+i);
       
-      var ypos = absheight - 15*(data[i][j]['pitch'] - min);
+      var ypos = absheight - 18*(data[i][j]['pitch'] - min);
       note.style.top = ypos + 'px';
-      note.style.width = data[i][j]['dur']*30 + 'px';
-
-      var left = 40*data[i][j]['time'];
+      note.style.width = 10*(data[i][j]['dur']) + 'px';
+      
+      var left = 10*(data[i][j]['time']);
       note.style.left = left+"px";
-      note.style.backgroundColor= happy[data[i][j]['happy']];
+      note.style.backgroundColor= happy[data[i][j]['+/-']];
       datavis.appendChild(note);
     }
   }
 }
+
 
