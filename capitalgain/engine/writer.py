@@ -55,6 +55,8 @@ def write_chords(chords):
     return song
 
 def repack_visuals(music):
+    music = music[2]
+
     return music
 
 def send_visual(music, name):
