@@ -15,6 +15,7 @@ if (Meteor.isClient) {
       Router.go('graph');
     }
   });
+  
 }
 
 if (Meteor.isServer) {
