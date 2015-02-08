@@ -60,11 +60,17 @@ button{
 	border-radius: 5px;
 	font-family: Abel;
 	font-size: 25px;
-	-webkit-transition: all 2s;
-	transition: all 2s;
+	-webkit-transition: all 1s;
+	transition: all 1s;
 }
 button:hover{
 	cursor: pointer;
-	background-color: blue;
-	color: white;
+	background-color: #11AED1;
+	color: black;
+}
+#go-logo{
+	width: 45px;
+	height: 40px;
+	margin-top: -3px;
+	margin-left: -5px;
 }

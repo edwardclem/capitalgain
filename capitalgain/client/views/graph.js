@@ -28,14 +28,14 @@ Template.graph.helpers({
 }});
 function generateGraph(data){
   datadoc = musicData.findOne({ticker: Session.get('ticker')});
-  data = datadoc.musicdata
+  data = datadoc.musicdata;
   console.log(data);
   min = 40;
   max = 70;
-  happy = ['#06144F','#4A4B4D', '#091E73', '#656B85', '#7480AD', '#3B4B8A', '#213FB8',
-            '#2A806C', '#2ABD9A', '#1DB86A', '#1F9135', '#0AC42F', '#7ECF15', '#E8E520',
-            '#B3154A', '#99264C', '#B3207D', '#E8159B', '#D052F2', '#C884DB', '#94D1F7',
-            '#43B4FA', '#FA4383', '#89E34D', '#ED4037', '#BF54BC', '#A865BA'];
+  happy = ['#081A45','#18409E', '#7C828F', '#3B3E45', '#382E5C', '#0E453F', '#0B3B0F',
+            '#0B4480', '#5C0F28', '#2F2952', '#492969', '#70215B', '#338238', '#328A88',
+            '#1C857A', '#157A99', '#6C3E96', '#10A6AD', '#AD104F', '#6155E6', '#1D8539',
+            '#4BD1AB', '#E7ED3B', '#3BD0ED', '#9156D1', '#5ABF1F', '#61EDE6'];
   var datavis = document.getElementById("data-vis");
   
   var absheight = datavis.clientHeight;
