@@ -9,6 +9,10 @@ def read_data(filename, col=4):
             split_string = string.split(',')
             data.append(float(split_string[col]))
             string = f.readline()
+    data = data[-2580:]
+    if len(data) != 2580:
+        raise RuntimeWarning('Not enough data present. May cause '
+            'unexpected behavior')
     return data[-2580:]
 
 def get_ma(values, window):
@@ -42,8 +46,10 @@ def get_delta(filename):
     delta = delta / max(delta) * 30
     return delta
 
-"""
-import matplotlib.pyplot as plt
+try:
+    import matplotlib.pyplot as plt
+except ImportError:
+    print 'Need matplotlib for debugging purposes'
 # For debugging purposes
 def visualize(data):
     x = np.arange(len(data))
@@ -52,4 +58,4 @@ def visualize(data):
     plt.scatter(x, data)
     plt.plot(x, predicted)
     plt.show()
-"""
+
