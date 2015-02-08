@@ -12,8 +12,11 @@ Template.capitalgain.events({
     }
 });
 Template.capitalgain.rendered = function(){
+  Session.set('playing', false);
   //console.log("resetting ticker");
   Session.set('ticker', null);
   audio.pause();
   audio = null;
+  clearInterval(interval);
+  interval = null;
 }
