@@ -3,7 +3,7 @@ import numpy as np
 from scipy.stats import norm
 import requests
 from random import randint
-from utils import get_data
+from utils import get_data, get_delta
 
 all_chords = ['664', '66', '6', '264', '26', '2', '364', '36', '3', '27', '37', '67', 'b7', '47', '57', '17', '5/5', '464', '46', '4', '564', '56', '5', '164', '16', '1']
 
