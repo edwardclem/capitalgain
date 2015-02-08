@@ -105,7 +105,7 @@ def generate_melody(filename, chord_data):
 			pitch = possible_notes[index]
 			i += 1
 		melody.append(pitch)
-	return [{'note':val, 'vel':val2} for val, val2 in zip(melody, dynamics)]
+	return [{'note':m, 'vel':d, 'val':p} for m, d, p in zip(melody, dynamics, data[1:])]
 
 
 
