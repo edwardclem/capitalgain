@@ -19,7 +19,7 @@ def get_duration(data):
 	i = 1
 	count = [1]
 	while i < len(data):
-		if np.abs(data[i] - data[i-1]) <= 1:
+		if np.abs(data[i] - data[i-1]) <= 2:
 			count[-1] += 1
 			data.pop(i)
 		else:
