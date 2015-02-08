@@ -58,10 +58,8 @@ body{
 .note{
 	height:15px;
 	position: absolute;
-	opacity: 0.2;
+	opacity: 1;
 	-webkit-transition: all 0.2s;
 	transition: all 0.2s;
 }
-.active{
-	opacity: 1;
-}
+

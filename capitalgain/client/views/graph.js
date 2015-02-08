@@ -6,7 +6,6 @@ Template.graph.rendered = function() {
     audio = new Audio(filepath);
     generateGraph();
     console.log(graphWidth());
-    animateGraph();
 };
 
 
@@ -81,6 +80,13 @@ function generateGraph() {
 
 }
 
+
+
+function animateGraph(){
+  interval = setInterval(moveGraph, 15);   
+ 
+}
+
 function movementRate() {
 
 }
@@ -109,6 +115,15 @@ function moveGraph() {
     var scroll = document.getElementById("data-vis");
     console.log(audio.duration);
     console.log(scroll.style.width);
+    // var chord = document.getElementByClassName("chord"+i);
+    // var fin = 0-chord.offsetLeft;
+    // if(scroll.offsetLeft < fin){
+    //   i++;
+    //   chord.className.replace( /(?:^|\s)active(?!\S)/g , '' );
+    // }
+    // else if (!(chord.className.match(/(?:^|\s)active(?!\S)/))){
+    //   chord.className+= "active";
+    // }
 
     var left = scroll.offsetLeft - (9.48);
     scroll.style.left = left + 'px';
