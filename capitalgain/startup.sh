@@ -2,4 +2,4 @@ export MONGO_URL='mongodb://cgains:moneysings@ds062097.mongolab.com:62097/capita
 export ROOT_URL='http://sonifythestockmarket.com'
 export PORT=80
 
-sudo meteor 
+sudo -E meteor 
