@@ -51,14 +51,29 @@ input{
 	padding: 5px;
 }
 #search{
-	width: 80%;
-	height: 30px;
+	width: 40%;
+	height: 50px;
 	font-size: 20px;
 	margin-right: 20px;
+	margin-left: 18%;
 	border: 2px solid black;
 	border-radius: 3px;
 	color: black;
+	padding-left: 15px;
+	outline: none;
+	-webkit-appearance: none;
+	-moz-appearance: none;
+	appearance: none;
 	
+}
+#search:hover{
+	cursor: pointer;
+}
+option{
+	height: 50px;
+	font-family: Quicksand;
+	font-weight: 300;
+
 }
 button{
 	position: absolute;

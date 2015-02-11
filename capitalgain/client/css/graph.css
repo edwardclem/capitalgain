@@ -42,22 +42,24 @@ body{
 	top: 220px;
 	background-color: white;
 	width: 90%;
-	height: 700px;
+	height: 450px;
 	left: 30px;
-	overflow: scroll;
+	overflow-x: hidden;
 	margin-bottom: 50px;
 }
 #data-vis{
 	position: absolute;
-	height: 700px;
+	height: 450px;
 	top: 0px;
-	/*width: 100%;*/
+	width: 100%;
 	left: 0px;
 
 }
 .note{
 	height:15px;
 	position: absolute;
+	border-width: 3px;
+	border-style: solid;
 	/*opacity: 0.2;*/
 
 	-webkit-transition: all 0.2s;
