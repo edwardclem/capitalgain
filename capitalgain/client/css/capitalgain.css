@@ -28,7 +28,7 @@ h1{
 	position: relative;
 	z-index: 1;
 	margin-left: -10px;
-	width: 108%;
+	width: 101.5%;
 	height: 300px;
 }
 #search-bar{
@@ -36,19 +36,44 @@ h1{
 	margin-left: auto;
 	width: 50%;
 }
+a{
+	margin-top: 20px;
+	display: block;
+	margin-left: 30%;
+	font-family: Quicksand;
+	font-weight: 300;
+	text-decoration: none;
+	font-size: 20px;
+	color: white;
+}
 input{
 	outline: none;
 	padding: 5px;
 }
 #search{
-	width: 80%;
-	height: 30px;
+	width: 40%;
+	height: 50px;
 	font-size: 20px;
 	margin-right: 20px;
+	margin-left: 18%;
 	border: 2px solid black;
 	border-radius: 3px;
 	color: black;
+	padding-left: 15px;
+	outline: none;
+	-webkit-appearance: none;
+	-moz-appearance: none;
+	appearance: none;
 	
+}
+#search:hover{
+	cursor: pointer;
+}
+option{
+	height: 50px;
+	font-family: Quicksand;
+	font-weight: 300;
+
 }
 button{
 	position: absolute;

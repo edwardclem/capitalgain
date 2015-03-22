@@ -42,7 +42,7 @@ function generateGraph() {
     });
     data = datadoc.musicdata;
     console.log(data);
-    min = 60;
+    min = 50;
     max = 70;
     maxlength = data.length[0];
     happy = ['#081A45', '#18409E', '#7C828F', '#3B3E45', '#382E5C', '#0E453F', '#0B3B0F',
@@ -51,27 +51,32 @@ function generateGraph() {
         '#4BD1AB', '#E7ED3B', '#3BD0ED', '#9156D1', '#5ABF1F', '#61EDE6'
     ];
     var datavis = document.getElementById("data-vis");
-    var absheight = datavis.clientHeight;
+    var absheight = 450;
     for (var h = 0; h < data.length; h++) {
         for (var i = 0; i < data[h].length; i++) {
             for (var j = 0; j < data[h][i].length; j++) {
                 //create note div with id
                 //makeNote(data, i, j);
                 var note = document.createElement("div");
-                note.setAttribute("class", "note chord" + i);
-
-
-                var ypos = absheight - 18 * (data[h][i][j]['pitch'] - min);
+                note.setAttribute("class", "note");
+                var ypos = absheight - 11*(data[h][i][j]['pitch'] - min);
                 note.style.top = ypos + 'px';
                 note.style.width = 250 * (data[h][i][j]['dur']) + 'px';
 
                 var left = 250 * (data[h][i][j]['time']);
                 note.style.left = left + "px";
+                
                 if (h != 1) {
                     note.style.backgroundColor = happy[data[h][i][j]['+/-']];
-                } else {
-                    note.style.backgroundColor = "black";
+                    note.style.borderColor = happy[data[h][i][j]['+/-']];
+                    
                 }
+                else{
+                  note.style.backgroundColor = "white";
+                  note.style.borderColor = "#B5B3B5";
+
+                }
+               
                 datavis.appendChild(note);
             }
 
@@ -86,16 +91,6 @@ function animateGraph(){
   interval = setInterval(moveGraph, 15);   
  
 }
-
-function movementRate() {
-
-}
-
-// function animateGraph() {
-//     console.log(audio.duration);
-//     var duration = 15;
-//     interval = setInterval(moveGraph, duration);
-// }
 
 //there's probably a more elegant way to do this.
 function graphWidth() {
@@ -113,8 +108,6 @@ function graphWidth() {
 
 function moveGraph() {
     var scroll = document.getElementById("data-vis");
-    console.log(audio.duration);
-    console.log(scroll.style.width);
     // var chord = document.getElementByClassName("chord"+i);
     // var fin = 0-chord.offsetLeft;
     // if(scroll.offsetLeft < fin){
