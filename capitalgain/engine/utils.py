@@ -1,4 +1,5 @@
 import numpy as np
+from scipy.ndimage.filters import gaussian_filter1d
 
 def read_data(filename, col=4):
     data = []
@@ -27,8 +28,9 @@ def find_delta(data):
     return delta
 
 def get_variance(data):
-    var = np.array([np.var(data[i:i+5]) for i in range(1, len(data) - 15, 5)])
+    var = np.array([np.var(data[i:i+50]) for i in range(0, len(data), 5)])
     std = var**(0.5)
+    std = gaussian_filter1d(std, 10)
     std = std / std.max() * 64 + 63
     return std
 
