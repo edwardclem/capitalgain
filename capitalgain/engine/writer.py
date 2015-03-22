@@ -79,8 +79,8 @@ def repack_visuals(music):
     return music
 
 def send_visual(music, name):
-    client = MongoClient('mongodb://cgains:moneysings@ds062097.mongolab.com:62097/capital_gain_database')
-    db = client.capital_gain_database
+    client = MongoClient('mongodb://capitalgain_db:H0rQdxIhlAfSEtLhzGSJGSQ5BXYljYsiDQc1UAoJTsY-@ds060977.mongolab.com:60977/capitalgain_db')
+    db = client.capitalgain_db
     if db.musicdata.find_one({'ticker':name.upper()}) == None:
         visual = {'ticker':name.upper(),'file':'audio/'+name+'.mp3','musicdata':repack_visuals(music)}
         db.musicdata.insert(visual)

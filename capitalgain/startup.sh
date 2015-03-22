@@ -1,3 +1,3 @@
-export MONGO_URL='mongodb://cgains:moneysings@ds062097.mongolab.com:62097/capital_gain_database'
+export MONGO_URL='mongodb://capitalgain_db:H0rQdxIhlAfSEtLhzGSJGSQ5BXYljYsiDQc1UAoJTsY-@ds060977.mongolab.com:60977/capitalgain_db'
 
 sudo -E meteor --port 80
