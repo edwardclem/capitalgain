@@ -98,14 +98,24 @@ def generate_melody(filename, chord_data):
 			for note in notes:
 				scale = 0
 				while note + scale <= 24:
-					possible_notes.append(note)
+					possible_notes.append(note + scale)
 					scale += 8
 			dist = np.array(possible_notes) - pitch
-			index = np.argmin(dist)
+			index = np.argmin(np.abs(dist))
 			pitch = possible_notes[index]
 			i += 1
 		melody.append(pitch)
-	return [{'pitch':m, 'vel':d, 'val':p} for m, d, p in zip(melody, dynamics, data[1:])]
+
+	melody_data = [{'pitch':m, 'vel':d, 'val':p, 'dur':1} for m, d, p in zip(melody, dynamics, data[1:])]
+	i = 0
+	while i < len(melody_data) - 1:
+		if melody_data[i+1]['pitch'] == melody_data[i]['pitch']:
+			melody_data.pop(i+1)
+			melody_data[i]['dur'] += 1
+		else:
+			i += 1
+	return melody_data
+
 
 
 
