@@ -5,7 +5,8 @@ import requests
 from random import randint
 from utils import get_data, get_delta
 # 264, 26, 364 disallowed
-all_chords = ['664', '66', '6', '2', '36', '3', '27', '37', '67', 'b7', '47', '57', '17', '5/5', '464', '46', '4', '564', '56', '5', '164', '16', '1']
+all_chords = ['664', '664', '66', '66', '6', '6', '2', '2', '36', '36', '3', '3', '27', '27', '37', '37', '67', '67', 'b7', 'b7', '47', '47', '57', '57', '17', '17', 
+				'5/5', '5/5', '464', '464', '46', '46', '4', '564', '564', '56', '56', '5', '164', '164', '16', '16', '1']
 theory = {'1':[1,1,3,5],'4':[4,4,6,8],'6':[6,6,8,10],'5':[5,5,7,9],'2':[2,2,4,6],
 			'3':[3,3,5,7],'27':[2,2,4,6,8],'47':[4,4,6,8,10],'67':[6,6,8,10,12],
 			'16':[1,3,5,8],'56':[5,7,9,12],'164':[1,5,8,10],'b7':[7,7,9,11],
@@ -38,7 +39,12 @@ def get_duration(data):
 def get_best_chord(index, previous_chords):
 	chord_probs = get_chord_probs(previous_chords)
 	probs = norm.pdf(np.arange(len(all_chords)), index)
-	all_chord_dict = {chord : p for chord, p in zip(all_chords, probs)}
+	all_chord_dict = {}
+	for chord, p in zip(all_chords, probs):
+		if chord in all_chord_dict:
+			all_chord_dict[chord] += p
+		else:
+			all_chord_dict[chord] = p
 	max_prob = float('-inf')
 	best_chord = None
 	for chord in chord_probs:
