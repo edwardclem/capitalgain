@@ -45,7 +45,7 @@ def get_delta(filename):
     delta = find_delta(get_ma(data, 20))
     delta = delta[0::10]
     delta = delta - delta.min()
-    delta = delta / max(delta) * 30
+    delta = delta / max(delta) * 45
     return delta
 
 try:
