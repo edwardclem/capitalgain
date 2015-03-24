@@ -112,12 +112,12 @@ def generate_melody(filename, chord_data):
 			i += 1
 		melody.append(pitch)
 
-	melody_data = [{'pitch':m, 'vel':d, 'val':p, 'dur':1} for m, d, p in zip(melody, dynamics, data[1:])]
+	melody_data = [{'pitch':m, 'vel':d, 'val':p, 'dur':0.5} for m, d, p in zip(melody, dynamics, data[1:])]
 	i = 0
 	while i < len(melody_data) - 1:
 		if melody_data[i+1]['pitch'] == melody_data[i]['pitch']:
 			melody_data.pop(i+1)
-			melody_data[i]['dur'] += 1
+			melody_data[i]['dur'] += 0.5
 		else:
 			i += 1
 	return melody_data
