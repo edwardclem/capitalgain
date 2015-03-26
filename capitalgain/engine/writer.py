@@ -1,10 +1,13 @@
 #!usr/bin/env python
-from pymongo import MongoClient
-from midiutil.MidiFile import *
-from note_generator import generate_chords, generate_melody
+from pymongo import MongoClient #Allows interface with website
+from midiutil.MidiFile import * #MIDI I/O library
+from note_generator import generate_chords, generate_melody #functions called in note generation script
 
+#Theory defines notes in a chord, with the first being the bass note (typically the root)
 theory = {'1':[1,1,3,5],'4':[4,4,6,8],'6':[6,6,8,10],'5':[5,5,7,9],'2':[2,2,4,6],'3':[3,3,5,7],'27':[2,2,4,6,8],'47':[4,4,6,8,10],'67':[6,6,8,10,12],'16':[1,3,5,8],'56':[5,7,9,12],'164':[1,5,8,10],'b7':[7,7,9,11],'57':[5,5,7,9,11],'37':[3,3,5,7,9],'5/5':[5,2,4.5,6],'17':[1,1,3,5,7],'464':[4,1,4,6],'664':[6,3,6,8],'564':[5,2,5,7],'46':[4,6,8,11],'57/6':[5,3,5.5,7,9],'66':[6,1,3,6],'36':[3,5,7,10]}
+#Number of tracks to put in the midi file.  This should be made to happen automatically
 MIDIOut = MIDIFile(4)
+#For rekeying
 pitchup = 3
 
 def write_midi(song,stock):
@@ -91,13 +94,18 @@ def send_visual(music, name):
 
 import sys
 if __name__ == '__main__':
-    stock = 'aapl'
-    if (len(sys.argv) == 2):
-        stock = sys.argv[1]
-    print('Analyzing ' + stock.upper())
-    testchords = generate_chords('data/' + stock + '.us.txt')
-    melody = generate_melody('data/' + stock + '.us.txt', testchords)
-    testmusic = write_chords(testchords, melody)
-    print('Music generated.')
-    write_midi(testmusic,stock)
-    send_visual(testmusic,stock)
+    stocks = []
+    tickers = sys.argv[1:] #Take in all arguments as tickers
+    print tickers
+    if (len(sys.argv) == 1):
+        stocks.append('aapl')
+    for ticker in tickers:
+        stocks.append(ticker)
+    for stock in stocks:
+        print('Analyzing ' + stock.upper())
+        testchords = generate_chords('data/' + stock + '.us.txt')
+        melody = generate_melody('data/' + stock + '.us.txt', testchords)
+        testmusic = write_chords(testchords, melody)
+        print('Music generated.')
+        write_midi(testmusic,stock)
+        send_visual(testmusic,stock)

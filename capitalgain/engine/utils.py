@@ -2,8 +2,8 @@ import numpy as np
 from scipy.ndimage.filters import gaussian_filter1d
 
 # Global Variables
-beat_length = 10 # Controls number of data points per beat of music (original was 10)
-song_length = 256 # Controls number of beats in the song (original was 256)
+beat_length = 20 # Controls number of data points per beat of music (original was 10)
+song_length = 128 # Controls number of beats in the song (original was 256)
 
 def read_data(filename, col=4):
     data = []
