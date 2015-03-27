@@ -8,10 +8,23 @@
 
 		<body>
 		<!-- <img src = '/images/background.jpg' id= 'background'> -->
-		<div id= 'background-img-about'>
-		<h1 id ='howitworks'> How It Works</h1>
-		<p id='description'>Capital Gain reads stock data (provided by Stooq.com) into a python script. The script looks for indicators of positive and negative performance. It then uses a chord prediction API (hooktheory.com) to generate a chord sequence for the song. Taking motion of the stock price relative to a line of fit, we generate a melody to fit the key and chords. The algorithm generates a MIDI file that is rendered into audio in Ableton Live. <br/>We then present the audio with a visualization. The website is hosted on a Microsoft Azure virtual Linux installation and written in HTML/CSS with significant JavaScript animations. <br/>This project was a huge effort, but we managed to pull it off with careful planning and division of tasks. Roshan to data and turned it to chords. Philip took chords and turned them to music. Eddie took music and set up a Microsoft Azure/MongoDB/LAMP stack to host it all. Divya took the music, the data, and the website, and made it beautiful.</p>
-		</div>
+		<div id='background-img-about'>
+		    <h1 id='award'> Winner: Most Original (sponsored by Oracle) - Hack@Brown 2015</h1><img src='/images/hab-logo-poly.svg' id='hab-logo'>
+            <h2>Every day we see <i>data</i> displayed in <i>images</i>. But what if we communicated that same <i>data</i> in <i>sound</i>?</h2>
+		    <p id='description'>Capital Gain is an audiovisual experiment in telling the story of stock market data through sound.  Our algorithm takes raw market data (provided by <a href="http://www.stooq.com/">http://www.stooq.com</a>) and turns it into music. We use a careful combination of statistical analysis and music theory to generate music that relays information about performance, but is still nice to listen to.  For instance, a positive trend causes more major chords, and high variance increases the intensity of the melody.</p>
+            <h1 id="about">What's next?</h1>
+            <p id="description">Capital Gain was created in the bustle of Hack@Brown, and our primary goal was to generate a product that we could demo.  We plan to achieve certain short-term goals (better documentation, a more reliable webserver, etc.) in the coming weeks.  After that, possible new features could include:</p>
+            <ul>
+                <li>Mobile-ready visualization and a more dynamic UI</li>
+                <li>Incorporate more data into the visuals (e.g., showing the price at a certain moment)</li>
+                <li>Improve the algorithm to run more efficiently and represent information more transparently</li>
+                <li>Make it all open-source and modular, possibly integrating the result with Beaker Notebook</li>
+            </ul>
+            <h1 id="about">About the Team</h1>
+            <table>
+                <!--Insert here all the bio information-->
+            </table>
+        </div>
 		
 	</body>
 
