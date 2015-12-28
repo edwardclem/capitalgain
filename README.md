@@ -10,4 +10,4 @@ The algorithm generates a MIDI file that is rendered into audio in Ableton Live.
 
 This project was a huge effort, but we managed to pull it off with careful planning and division of tasks. Roshan to data and turned it to chords. Philip took chords and turned them to music. Eddie took music and set up a Microsoft Azure/MongoDB/Meteor stack to host it all. Divya took the music, the data, and the website, and made it beautiful.
 
-STARTUP INSTRUCTIONS: Don't run with meteor, run ./startup.sh to properly access the remote database.
+STARTUP INSTRUCTIONS: Don't run with meteor, run ./startup.sh to properly access the remote database. It looks like there is some weird error with `sudo`, but that doesn't seem to be causing problems? Once app is running type `ctrl-A` and then `ctrl-D` to exit. 
