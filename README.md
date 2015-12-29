@@ -11,12 +11,12 @@ The algorithm generates a MIDI file that is rendered into audio in Ableton Live.
 
 This project was a huge effort, but we managed to pull it off with careful planning and division of tasks. Roshan to data and turned it to chords. Philip took chords and turned them to music. Eddie took music and set up a Microsoft Azure/MongoDB/Meteor stack to host it all. Divya took the music, the data, and the website, and made it beautiful.
 
-##Startup Instructions:## 
+##Startup Instructions:##
 Don't just run meteor!  Login via SSH, then run:
-'''
+```
 screen -d -m ./capitalgain/startup.sh
-'''
+```
 Don't expect any output - the process will startup in the background.  If you need to debug, just run
-'''
+```
 ./capitalgain/startup.sh
-'''
+```
